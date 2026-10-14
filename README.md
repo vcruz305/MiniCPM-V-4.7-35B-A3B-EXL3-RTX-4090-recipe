@@ -14,6 +14,15 @@ Serve the **3.74 bpw SAGE EXL3** release of MiniCPM-V 4.7 on a single 24 GB
 
 Decode speed stays at 84–91 tok/s from 2K to 262K tokens of context.
 
+
+## Model
+
+| | Hugging Face |
+|---|---|
+| Checkpoint served (includes the dSparK drafter under `dspark/`) | [vcruz305/MiniCPM-V-4.7-35B-A3B-EXL3-SAGE-3.74bpw](https://huggingface.co/vcruz305/MiniCPM-V-4.7-35B-A3B-EXL3-SAGE-3.74bpw) |
+| Base model | [openbmb/MiniCPM-V-4.7-35B-A3B](https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B) |
+| Official dSparK drafter | [openbmb/MiniCPM-V-4.7-35B-A3B-DSpark](https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B-DSpark) |
+
 ## Quick start
 
 Linux or WSL2 with a CUDA-enabled PyTorch/Triton, CUDA toolkit and a C++ compiler:
