@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "provenance": "recipe_author_gpu_runs",
+  "date": "2026-10-13",
+  "engine": "TabbyAPI (vcruz305/tabbyAPI) + ExLlamaV3 (vcruz305/exllamav3 master)",
+  "hardware": "one NVIDIA GeForce RTX 4090 24 GB (sm_89), WSL2 Ubuntu 22.04, driver 617.14, PCIe Gen2 x4 eGPU link",
+  "exllamav3_commits": {
+    "short_context": "dc77864640a90768c1de227752294288b71bdf70",
+    "full_context_target_only": "dc77864640a90768c1de227752294288b71bdf70",
+    "full_context_dspark_q4_and_depth_sweep": "475461e9a1a288e7c10eb472056239d3fb78b625"
+  },
+  "short_context": {
+    "prompt_tokens": 1024,
+    "completion_tokens": 256,
+    "warmups": 2,
+    "samples": 7,
+    "sampling": "greedy",
+    "kv": "FP16",
+    "max_seq_len": 8192,
+    "concurrency": 1,
+    "target_only": {
+      "decode_p50": 92.06,
+      "prefill_p50": 591.91,
+      "ttft_p50_s": 1.768,
+      "device_mib_loaded": 17034
+    },
+    "dspark_w7": {
+      "decode_p50": 103.14,
+      "prefill_p50": 591.91,
+      "ttft_p50_s": 1.789,
+      "accepted": 1136,
+      "proposed": 1948,
+      "device_mib_loaded": 17902
+    },
+    "dspark_w4": {
+      "decode_p50": 101.06,
+      "accepted": 1113,
+      "proposed": 1713
+    },
+    "speedup_x_w7": 1.12,
+    "responses_identical": true
+  },
+  "full_context": {
+    "max_seq_len": 262144,
+    "cache_size": 262400,
+    "chunk_size": 2048,
+    "rows": {
+      "Q4_target_only": {
+        "prefill_tps": 1235.54,
+        "ttft_s": 214.0,
+        "needles_found": 4,
+        "decode_median": 88.42,
+        "decode_min": 83.69,
+        "decode_max": 89.82,
+        "device_peak_mib": 19160
+      },
+      "Q8_target_only": {
+        "prefill_tps": 1304.34,
+        "ttft_s": 202.8,
+        "needles_found": 4,
+        "decode_median": 88.87,
+        "decode_min": 88.25,
+        "decode_max": 89.05,
+        "device_peak_mib": 20428
+      },
+      "Q4_dspark_w7": {
+        "prefill_tps": 1291.41,
+        "ttft_s": 208.0,
+        "needles_found": 4,
+        "decode_median": 38.11,
+        "decode_min": 28.99,
+        "decode_max": 41.3,
+        "device_peak_mib": 20910,
+        "device_peak_mib_note": "upper bound: telemetry file also contains an earlier aborted attempt"
+      }
+    },
+    "outputs_identical_target_vs_dspark": true
+  },
+  "depth_sweep_q4": {
+    "max_seq_len": 131072,
+    "completion_tokens": 256,
+    "prompt": "synthetic document + passcode + 400-word essay request",
+    "columns": [
+      "prompt_tokens",
+      "target_only_decode",
+      "dspark_w7_decode"
+    ],
+    "rows": [
+      [
+        2040,
+        84.89,
+        61.16
+      ],
+      [
+        8183,
+        85.7,
+        53.57
+      ],
+      [
+        12280,
+        87.17,
+        55.61
+      ],
+      [
+        16376,
+        84.43,
+        48.95
+      ],
+      [
+        24568,
+        84.31,
+        37.58
+      ],
+      [
+        32758,
+        84.1,
+        45.32
+      ],
+      [
+        65528,
+        84.82,
+        44.04
+      ],
+      [
+        129992,
+        90.71,
+        43.94
+      ]
+    ],
+    "notes": "8K-65K rows from an idle-host rerun; 2,040/12,280/129,992 from the first sweep (rows taken while another build was running were discarded)",
+    "all_outputs_identical": true
+  },
+  "clean_setup": {
+    "wsl2_ubuntu_22_04_minutes": 7.2,
+    "exllamav3_commit": "475461e9a1a288e7c10eb472056239d3fb78b625",
+    "exit": 0
+  }
+}
